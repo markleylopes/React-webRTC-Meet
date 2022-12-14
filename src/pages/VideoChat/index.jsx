@@ -7,8 +7,10 @@ export function VideoChat() {
 
 	return (
 		<>
-			<VideoStream stream={localStream} />
-			<VideoStream isRemote stream={remoteStream} />
+			<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+				<VideoStream stream={localStream} />
+				<VideoStream isRemote stream={remoteStream} />
+			</div>
 			<VideoCallControls />
 		</>
 	)
