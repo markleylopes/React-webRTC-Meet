@@ -23,6 +23,6 @@ export function VideoStream({ stream, isRemote }) {
 }
 
 VideoStream.propTypes = {
-	stream: PropTypes.oneOfType([undefined, PropTypes.object]),
+	stream: PropTypes.oneOfType([undefined, PropTypes.srcObject, PropTypes.stream]),
 	isRemote: PropTypes.bool
 }
