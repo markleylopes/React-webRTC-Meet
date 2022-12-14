@@ -26,7 +26,6 @@ export function VideoStream({ stream, isRemote }) {
 				style={{
 					boxSizing: "border-box",
 					border: `solid 8px ${isRemote ? "#ff4a4a" : "#4949ff"}`,
-					background: stream ? "transparent" : isRemote ? "rgb(56 0 0)" : "rgb(1 1 68)"
 				}}
 				autoPlay
 				height="400px"

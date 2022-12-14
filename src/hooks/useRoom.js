@@ -3,6 +3,7 @@ import {
 	collection, setDoc, doc, getDoc, onSnapshot, addDoc, updateDoc, deleteDoc,
 } from "firebase/firestore"
 import { db } from "../services/firebase"
+import { nanoid } from "nanoid"
 import { useVideoStreamContext } from "../context/videoStream"
 import { stunServerconfiguration } from "../constants"
 import { registerPeerConnectionListeners } from "../utils/rtc"
@@ -17,7 +18,8 @@ export const useRoom = () => {
 	} = useVideoStreamContext()
 
 	const createRoom = async () => {
-		const roomRef = await addDoc(collection(db, "rooms"), {})
+		const roomRef = doc(db, "rooms", roomId || nanoid(6))
+		await setDoc(roomRef, {})
 		console.log("Create PeerConnection with configuration: ", stunServerconfiguration)
 		peerConnection.current = new RTCPeerConnection(stunServerconfiguration)
 
@@ -90,8 +92,8 @@ export const useRoom = () => {
 		// Listen for remote ICE candidates above
 	}
 
-	const closeRoom = () => {
-		localStream.getTracks().forEach((track) => {
+	const closeRoom = async () => {
+		localStream?.getTracks()?.forEach((track) => {
 			track.enabled = false
 			track.stop()
 		})
@@ -106,10 +108,11 @@ export const useRoom = () => {
 
 		// Delete room on hangup
 		if (roomId) {
-			const roomRef = db.collection("rooms").doc(roomId)
+			const roomRef = await doc(db.collection("rooms"), roomId)
 
 			deleteDoc(roomRef)
 		}
+		window.location.reload()
 	}
 
 	const joinRoomById = async () => {
