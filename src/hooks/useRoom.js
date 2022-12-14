@@ -108,9 +108,9 @@ export const useRoom = () => {
 
 		// Delete room on hangup
 		if (roomId) {
-			const roomRef = await doc(db.collection("rooms"), roomId)
+			const roomRef = doc(db, "rooms", roomId)
 
-			deleteDoc(roomRef)
+			await deleteDoc(roomRef)
 		}
 		window.location.reload()
 	}

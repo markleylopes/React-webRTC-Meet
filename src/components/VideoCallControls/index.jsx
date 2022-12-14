@@ -32,7 +32,7 @@ const styles = {
 export function VideoCallControls() {
 	const { audioEnabled, videoEnabled, openUserMedia, toggleAudio, toggleVideo } = useMediaStream()
 	const {
-		enterRoom, closeRoom, setRoomId, roomId,
+		createRoom, joinRoomById, closeRoom, setRoomId, roomId,
 	} = useRoom()
 
 	return (
@@ -41,10 +41,11 @@ export function VideoCallControls() {
 			<input
 				type="text"
 				value={roomId}
-				style={styles.button}
 				onChange={({ target }) => setRoomId(target.value)}
 			/>
-			<button type="button" onClick={enterRoom}>Criar / Entrar em uma sala</button>
+			<button type="button" onClick={createRoom}>Criar Sala</button>
+			<button type="button" onClick={joinRoomById}>Entrar em uma sala</button>
+
 			<button style={styles.iconButton} type="button" onClick={toggleAudio}>
 				{audioEnabled ? <Microphone size="20" /> : <MicrophoneSlash size="20" />}
 			</button>
