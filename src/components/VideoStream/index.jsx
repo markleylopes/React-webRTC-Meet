@@ -1,6 +1,6 @@
 
 import PropTypes from "prop-types"
-import React, { memo } from 'react'
+import { memo } from "react"
 
 const styles = {
 	wrapper: { display: "inline-block", position: "relative", width: "50%", height: "400px", overflow: "hidden" },
